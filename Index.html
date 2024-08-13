@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webhook Button</title>
+</head>
+<body>
+    <button id="toggleButton">Toggle ON/OFF</button>
+
+    <script>
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            const webhookUrl = 'YOUR_WEBHOOK_URL_HERE'; // Replace with your actual webhook URL
+            const isOn = this.innerText === 'Toggle ON';
+            this.innerText = isOn ? 'Toggle OFF' : 'Toggle ON';
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: isOn ? 'ON' : 'OFF' })
+            });
+        });
+    </script>
+</body>
+</html>
